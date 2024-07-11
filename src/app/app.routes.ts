@@ -4,7 +4,22 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadComponent: () =>
-      import('./pages/home/home.component').then((c) => c.HomeComponent),
+    redirectTo: 'episodes',
+  },
+  {
+    path: 'episodes',
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('./pages/episodes/episodes.page').then((m) => m.EpisodesPage),
+      },
+      {
+        path: ':id',
+        loadComponent: () =>
+          import('./pages/episode/episode.page').then((m) => m.EpisodePage),
+      },
+    ],
   },
 ];
